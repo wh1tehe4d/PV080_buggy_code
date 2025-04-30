@@ -1,5 +1,6 @@
 import yaml
 import flask
+import re
 
 app = flask.Flask(__name__)
 
@@ -32,7 +33,7 @@ def fetch_website(urllib_version: str, url):
         import urllib3 as urllib
     # exec(f"import urllib{urllib_version} as urllib", globals())
     # Fetch and print the requested URL
-
+    assert re.search("https://[a-zA-Z0-9\.]*", url) == url
     try:
         http = urllib.PoolManager()
         r = http.request('GET', url)
