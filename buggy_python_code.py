@@ -23,9 +23,14 @@ def print_nametag(format_string, person):
     print(format_string.format(person=person))
 
 
-def fetch_website(urllib_version, url):
+def fetch_website(urllib_version: str, url):
+    v = int(urllib_version)
     # Import the requested version (2 or 3) of urllib
-    exec(f"import urllib{urllib_version} as urllib", globals())
+    if v == 2:
+        import urllib2 as urllib
+    else:
+        import urllib3 as urllib
+    # exec(f"import urllib{urllib_version} as urllib", globals())
     # Fetch and print the requested URL
 
     try:
@@ -33,7 +38,7 @@ def fetch_website(urllib_version, url):
         r = http.request('GET', url)
     except:
         print('Exception')
-    
+
     return r
 
 
